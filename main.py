@@ -9,8 +9,8 @@ class Game:
         self.screen = pygame.display.set_mode((X,Y))
         self.clock = pygame.time.Clock()
         self.running = True
-        obj.GameObject.width = 80
-        obj.GameObject.height = 80
+        obj.GameObject.width = 20
+        obj.GameObject.height = 20
         
 
     def run(self):
@@ -43,7 +43,7 @@ class Game:
     
 
 
-pg = Game(1280,720) #
+pg = Game(1280,720) # 64 36
 
 pg.run()
 
