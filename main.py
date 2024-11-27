@@ -1,6 +1,17 @@
 import sys,pygame
 speed = [2,2]
 black = 0,0,0
+class GameObject:
+    def __init__(self,x,y):
+        self.x = x
+        self.y = y
+        self.color = (0,0,0)
+    
+    def setColor(self,color):
+        self.color = color
+    
+    def draw(self, screen):
+        pygame.draw.rect(screen)
 class Game:
 
     def __init__(self,X,Y):
@@ -38,6 +49,10 @@ class Game:
         pygame.quit()
 
 
+# class Render:
+    
+
 pg = Game(1280,720)
 
 pg.run()
+
