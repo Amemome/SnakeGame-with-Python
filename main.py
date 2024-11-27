@@ -1,4 +1,5 @@
 import sys,pygame,obj
+import snake as Snk
 speed = [2,2]
 black = 0,0,0
 class Game:
@@ -9,23 +10,29 @@ class Game:
         self.screen = pygame.display.set_mode((X,Y))
         self.clock = pygame.time.Clock()
         self.running = True
-        obj.GameObject.width = 20
-        obj.GameObject.height = 20
+        self.board = [[0 for _ in range(64)] for _ in range(36)] # board 를 초기화.
+        obj.GameObject.cellSize = 20
         
 
     def run(self):
-        ballrect = pygame.Rect(100,100,50,50)
+        """run the game"""
+        snake = Snk.Snake()
         while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT: sys.exit()
-            ballrect = ballrect.move(speed)
-            if ballrect.left < 0 or ballrect.right > self.width:
-                speed[0] = -speed[0]
-            if ballrect.top < 0 or ballrect.bottom > self.height:
-                speed[1] = -speed[1]
-
-            self.screen.fill(black)
-            pygame.draw.rect(self.screen,(255,0,0),ballrect)
+            
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        snake.setDirection("up")
+                    if event.key == pygame.K_DOWN:
+                        snake.setDirection("down")
+                    if event.key == pygame.K_LEFT:
+                        snake.setDirection("left")
+                    if event.key == pygame.K_RIGHT:
+                        snake.setDirection("right")
+            snake.update()
+            snake.draw()
+            self.screen.fill((10,0,30))
             pygame.display.flip()
             self.clock.tick(60)
 
@@ -45,5 +52,5 @@ class Game:
 
 pg = Game(1280,720) # 64 36
 
-pg.run()
+pg.run() # 이벤트 루프 돌기 시작.
 
