@@ -1,19 +1,7 @@
-import sys,pygame
+import sys,pygame,obj
 speed = [2,2]
 black = 0,0,0
-class GameObject:
-    def __init__(self,x,y):
-        self.x = x
-        self.y = y
-        self.color = (0,0,0)
-    
-    def setColor(self,color):
-        self.color = color
-    
-    def draw(self, screen):
-        pygame.draw.rect(screen)
 class Game:
-
     def __init__(self,X,Y):
         pygame.init()
         self.width = X
@@ -21,11 +9,13 @@ class Game:
         self.screen = pygame.display.set_mode((X,Y))
         self.clock = pygame.time.Clock()
         self.running = True
+        obj.GameObject.width = 80
+        obj.GameObject.height = 80
         
 
     def run(self):
         ballrect = pygame.Rect(100,100,50,50)
-        while True:
+        while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT: sys.exit()
             ballrect = ballrect.move(speed)
@@ -52,7 +42,8 @@ class Game:
 # class Render:
     
 
-pg = Game(1280,720)
+
+pg = Game(1280,720) #
 
 pg.run()
 

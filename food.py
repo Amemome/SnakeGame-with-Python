@@ -1,13 +1,8 @@
-import random
+import random,obj
 
-class Food:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-    def ItemRandomPosition(self, width, height):
-        self.x = random.randint(0, width - 1)
-        self.y = random.randint(0, height - 1)
+class Food(obj.GameObject):
+    def __init__(self, x, y, color):
+        super().__init(x,y,color)
 
     def IsEaten(self, snake):
         pass
