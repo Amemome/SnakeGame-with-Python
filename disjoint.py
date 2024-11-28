@@ -1,22 +1,10 @@
-import pygame
+from collections import deque
 
-def main():
-    pygame.init()
-    screen = pygame.display.set_mode((800, 600))
-    pygame.display.set_caption("Pygame Test Window")
-    clock = pygame.time.Clock()
-    running = True
+a = deque()
 
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
 
-        screen.fill((30, 30, 30))
-        pygame.display.flip()
-        clock.tick(60)
+a.append(list(tuple([0,0])))
+a.append(list(tuple([1,0])))
+a.append(list(tuple([2,0])))
 
-    pygame.quit()
-
-if __name__ == "__main__":
-    main()
+if list([0,0]) in a: print("wow")

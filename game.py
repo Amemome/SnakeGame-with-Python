@@ -10,7 +10,7 @@ class Game:
         self.screen = pygame.display.set_mode((self.width,self.height))
         self.clock = pygame.time.Clock()
         self.running = True
-        self.gameSpeed = 12
+        self.gameSpeed = 5
         self.cellSize = 20 #cell size 를 누가 들고있을지 나중에 수정
         
 
@@ -30,6 +30,9 @@ class Game:
                         snake.setDirection("left")
                     if event.key == pygame.K_RIGHT:
                         snake.setDirection("right")
+                    
+                    if event.key == pygame.K_a:
+                        snake.addLength(3)
 
             self.screen.fill((10,0,30))
             snake.move()

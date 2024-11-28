@@ -6,10 +6,10 @@ class Snake(object.GameObject):
 
     def __init__(self, x=0, y=0,color=(255,0,0)):
         super().__init__(x, y, color)
-        self.head = [x,y] # 중간 지점에 머리를 둠.
+        self.head = [x,y] # 초기 머리 위치
         self.body = deque([(x,y)]) # 몸통은 덱으로 관리.
         self.speed = [0,0]
-        self.length = 1    
+        self.length = 1     # 현재 길이
         self.isDead = False
         self.cellSize = 20
     
@@ -30,17 +30,21 @@ class Snake(object.GameObject):
         self.head[0] += self.speed[0]
         self.head[1] += self.speed[1]
         self.body.append(list(tuple(self.head)))
-        self.body.popleft()
-        # if(self.length > len(self.body)-1):
-            
 
-        self.length = len(self.body) # 길이를 업데이트 해줍니다.
+        if(self.length == len(self.body)-1):
+            self.body.popleft()
+        
+
+
+
 
     def checkCollision(self,X,Y):
         # 화면 밖으로 나가면 아웃.
-        if(self.head[0] < 0 or self.head[0] >= X): self.isDead = True
-        if(self.head[1] < 0 or self.head[1] >= Y): self.isDead = True
-        if(tuple(self.head) in self.body): self.isDead = True # 몸통 Deque 에 머리가 속하면 충돌됨.
+        if (self.head[0] < 0 or self.head[0] >= X): self.isDead = True
+        if (self.head[1] < 0 or self.head[1] >= Y): self.isDead = True
+        if list(self.head) in list(self.body)[:-1]: self.isDead = True # 몸통 Deque 에 머리가 속하면 충돌됨.
+        print(f"head : {self.head} \n body : {self.body}")
+
         return self.isDead
 
         
