@@ -3,10 +3,11 @@ import snake as Snk
 
 class Game:
     def __init__(self,X,Y):
-        pygame.init()
+        success, fail = pygame.init()
+        print(f'success {success} , fail : {fail}')
         self.width = X
         self.height = Y
-        self.screen = pygame.display.set_mode((X,Y))
+        self.screen = pygame.display.set_mode((self.width,self.height))
         self.clock = pygame.time.Clock()
         self.running = True
         self.gameSpeed = 12
@@ -18,7 +19,7 @@ class Game:
         snake = Snk.Snake()
         while self.running:
             for event in pygame.event.get():
-                if event.type == pygame.QUIT: sys.exit()
+                if event.type == pygame.QUIT: self.running = False
             
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_UP:
