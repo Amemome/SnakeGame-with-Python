@@ -32,8 +32,8 @@ class Game:
 
             self.screen.fill((10,0,30))
             snake.move()
-            if(snake.checkCollision(self.width,self.height)):
-                self.quit() # 죽은 화면을 출력해야 하지만 게임 끄는걸로.
+            # if(snake.checkCollision(self.width,self.height)):
+            #     self.quit() # 죽은 화면을 출력해야 하지만 게임 끄는걸로.
 
 
 
