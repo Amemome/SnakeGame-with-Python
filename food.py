@@ -5,7 +5,7 @@ class Food(obj.GameObject):
         super().__init(x,y,color)
 
     def IsEaten(self, snake):
-        pass
+        pass #뱀에게 먹혔을 때의 코드, 추가 바람
 
 class Item1(Food):
     def __init__(self, x, y):
