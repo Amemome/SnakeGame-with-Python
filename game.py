@@ -1,5 +1,6 @@
-import sys,pygame,obj
+import sys,pygame
 import snake as Snk
+
 class Game:
     def __init__(self,X,Y):
         pygame.init()
@@ -10,7 +11,7 @@ class Game:
         self.running = True
         self.board = [[0 for _ in range(64)] for _ in range(36)] # board 를 초기화.
         self.gameSpeed = 12
-        obj.GameObject.cellSize = 20
+        self.cellSize = 20 #cell size 를 누가 들고있을지 나중에 수정
         
 
     def run(self):
@@ -29,8 +30,14 @@ class Game:
                         snake.setDirection("left")
                     if event.key == pygame.K_RIGHT:
                         snake.setDirection("right")
+
             self.screen.fill((10,0,30))
             snake.move()
+            if(snake.checkCollision(self.width,self.height)):
+                self.quit() # 죽은 화면을 출력해야 하지만 게임 끄는걸로.
+
+
+
             snake.draw(self.screen)
             pygame.display.flip()
             self.clock.tick(self.gameSpeed)
