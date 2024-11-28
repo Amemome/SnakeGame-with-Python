@@ -30,11 +30,11 @@ class Game:
                         snake.setDirection("left")
                     if event.key == pygame.K_RIGHT:
                         snake.setDirection("right")
-            snake.update()
-            snake.draw()
             self.screen.fill((10,0,30))
+            snake.move()
+            snake.draw(self.screen)
             pygame.display.flip()
-            self.clock.tick(60)
+            self.clock.tick(10)
 
 
 
@@ -46,11 +46,7 @@ class Game:
         pygame.quit()
 
 
-# class Render:
-    
-
 
 pg = Game(1280,720) # 64 36
-
 pg.run() # 이벤트 루프 돌기 시작.
 
