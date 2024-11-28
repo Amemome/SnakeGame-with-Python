@@ -1,7 +1,7 @@
-import obj,pygame
+import object,pygame
 from collections import deque
 
-class Snake(obj.GameObject):
+class Snake(object.GameObject):
     """플레이어가 조작할 수 있는 뱀 클래스"""
 
     def __init__(self, x=0, y=0,color=(255,0,0)):
@@ -30,7 +30,11 @@ class Snake(obj.GameObject):
         self.head[0] += self.speed[0]
         self.head[1] += self.speed[1]
         self.body.append(list(tuple(self.head)))
-        self.body.pop()
+        self.body.popleft()
+        # if(self.length > len(self.body)-1):
+            
+
+        self.length = len(self.body) # 길이를 업데이트 해줍니다.
 
     def checkCollision(self,X,Y):
         # 화면 밖으로 나가면 아웃.
