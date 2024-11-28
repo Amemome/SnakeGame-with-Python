@@ -9,7 +9,6 @@ class Game:
         self.screen = pygame.display.set_mode((X,Y))
         self.clock = pygame.time.Clock()
         self.running = True
-        self.board = [[0 for _ in range(64)] for _ in range(36)] # board 를 초기화.
         self.gameSpeed = 12
         self.cellSize = 20 #cell size 를 누가 들고있을지 나중에 수정
         
