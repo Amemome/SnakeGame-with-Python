@@ -120,9 +120,7 @@ class Game:
     def reset(self):
         self.snake = snk.Snake()
         self.generateFood()
-
-
-
+        self.score = 0
 
 
     def quit(self):
