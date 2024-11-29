@@ -6,8 +6,8 @@ class Food(object.GameObject):
         self.point = 0
 
     def setPosition(self,width,height,cellsize): # 다형성 사용. 메서드 오버라이딩
-        self.x = random.randint(0, width // cellsize) * cellsize
-        self.y = random.randint(0, height // cellsize) * cellsize
+        self.x = random.randint(0, width // cellsize -1) * cellsize
+        self.y = random.randint(0, height // cellsize -1) * cellsize
 
     def getPoint(self):
         return self.point

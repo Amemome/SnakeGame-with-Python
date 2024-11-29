@@ -6,22 +6,26 @@ class Snake(object.GameObject):
 
     def __init__(self, x=0, y=0,color=(255,0,0)):
         super().__init__(x, y, color)
-        self.head = [x,y] # 초기 머리 위치
+        self.head = [x,y] # 초기 머리 위치.
         self.body = deque([(x,y)]) # 몸통은 덱으로 관리.
         self.speed = [0,0]
         self.length = 1     # 현재 길이
         self.isDead = False
         self.cellSize = 20
+        self.dir = ""
     
     def setDirection(self,dir):
-        if(dir == "right"):
+        if(dir == "right" and self.dir != "left"):
             self.speed = [self.cellSize,0]
-        if(dir == "left"):
+        elif(dir == "left" and self.dir != "right"):
             self.speed = [-self.cellSize,0]
-        if(dir == "up"):
+        elif(dir == "up" and self.dir != "down"):
             self.speed = [0,-self.cellSize]           
-        if(dir == "down"):
+        elif(dir == "down" and self.dir != "up"):
             self.speed = [0,self.cellSize]
+        else:
+            return
+        self.dir = dir
 
     def addLength(self,n):
         self.length += n
@@ -45,7 +49,7 @@ class Snake(object.GameObject):
         if (self.head[0] < 0 or self.head[0] >= X): self.isDead = True
         if (self.head[1] < 0 or self.head[1] >= Y): self.isDead = True
         if list(self.head) in list(self.body)[:-1]: self.isDead = True # 몸통 Deque 에 머리가 속하면 충돌됨.
-        print(f"head : {self.head} \n body : {self.body}")
+        # print(f"head : {self.head} \n body : {self.body}")
 
         return self.isDead
 
