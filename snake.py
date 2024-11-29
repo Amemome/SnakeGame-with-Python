@@ -35,7 +35,9 @@ class Snake(object.GameObject):
             self.body.popleft()
         
 
-
+    def checkEatFood(self,food):
+        foodPos = food.getPosition()
+        return tuple(self.head) == foodPos
 
 
     def checkCollision(self,X,Y):

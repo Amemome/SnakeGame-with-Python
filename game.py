@@ -1,5 +1,6 @@
-import sys,pygame
-import snake as Snk
+import sys,pygame,random
+import snake as snk
+import food as fd
 
 class Game:
     def __init__(self,X,Y):
@@ -10,42 +11,63 @@ class Game:
         self.screen = pygame.display.set_mode((self.width,self.height))
         self.clock = pygame.time.Clock()
         self.running = True
-        self.gameSpeed = 5
+        self.gameSpeed = 10.5
         self.cellSize = 20 #cell size 를 누가 들고있을지 나중에 수정
-        
-
+        self.food = None
+        self.score = 0
+    def getDisplay(self):
+        return (self.width,self.hegiht)
+    
+    def getCellsize(self):
+        return self.cellSize
     def run(self):
         """run the game"""
-        snake = Snk.Snake()
+        self.snake = snk.Snake()
+        self.generateFood()
+
         while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT: self.running = False
             
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_UP:
-                        snake.setDirection("up")
+                        self.snake.setDirection("up")
                     if event.key == pygame.K_DOWN:
-                        snake.setDirection("down")
+                        self.snake.setDirection("down")
                     if event.key == pygame.K_LEFT:
-                        snake.setDirection("left")
+                        self.snake.setDirection("left")
                     if event.key == pygame.K_RIGHT:
-                        snake.setDirection("right")
+                        self.snake.setDirection("right")
                     
                     if event.key == pygame.K_a:
-                        snake.addLength(3)
+                        self.snake.addLength(3)
+
 
             self.screen.fill((10,0,30))
-            snake.move()
-            if(snake.checkCollision(self.width,self.height)):
+            self.snake.move()
+            
+            if(self.snake.checkCollision(self.width,self.height)):
                 self.quit() # 죽은 화면을 출력해야 하지만 게임 끄는걸로.
+            if(self.snake.checkEatFood(self.food)):
+                self.score += self.food.getPoint()
+                self.snake.addLength(self.food.getPoint())
+                self.generateFood()
 
-
-
-            snake.draw(self.screen)
+            self.food.draw(self.screen)
+            self.snake.draw(self.screen)
+            self.drawScore()
             pygame.display.flip()
             self.clock.tick(self.gameSpeed)
 
+    def generateFood(self):
+        self.food = random.choice([fd.Item1,fd.Item2,fd.Item3])()
+        self.food.setPosition(self.width,self.height,self.cellSize)
 
+
+    def drawScore(self):
+        font = pygame.font.Font(None,20)
+        scoreText = font.render(f"Score : {self.score}", True, (255,255,255))
+        self.screen.blit(scoreText,(24,24))
 
     def quit(self):
         pygame.quit()
