@@ -75,8 +75,12 @@ class Game:
             
 
     def generateFood(self):
-        self.food = random.choice([fd.Item1,fd.Item2,fd.Item3])()
-        self.food.setPosition(self.width,self.height,self.cellSize)
+        while True:
+            new_food = random.choice([fd.Item1, fd.Item2, fd.Item3])()
+            new_food.setPosition(self.width, self.height, self.cellSize)
+            if new_food.getPosition() not in self.snake.body:
+                self.food = new_food
+                break
 
     def drawScore(self):
         font = pygame.font.Font(None,48)
